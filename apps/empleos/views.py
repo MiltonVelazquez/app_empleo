@@ -33,7 +33,7 @@ class AgregarCategoria(LoginRequiredMixin, CreateView):
     
 class AgregarEmpleos(LoginRequiredMixin, CreateView):
     model = Empleos
-    fields = ['titulo', 'nombre_empresa','descripcion','imagen','categoria']
+    fields = ['titulo', 'nombre_empresa','descripcion','modalidad','localidad','categoria','imagen']
     template_name = 'empleos/agregar_empleo.html'
     success_url = reverse_lazy('inicio')
 
@@ -125,10 +125,4 @@ def OrdenarEmpleosPor(request):
     }
     return render(request, 'empleos/listar_empleos.html', context)
 
-def inicio(request):
-    empleos_recientes = Empleos.objects.order_by('-fecha_agregado')[:3]
-    context = {
-        'empleos_recientes' : empleos_recientes
-        }
 
-    return render(request, 'inicio.html', context)

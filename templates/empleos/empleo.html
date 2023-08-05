@@ -31,8 +31,14 @@
                 </strong>
                 </h2>
                 <h3>{{ empleo.nombre_empresa }}</h3>
-                <p style="text-align: center;  white-space: pre-wrap; 
-                width: 200px;">{{ empleo.descripcion }}</p>
+                <div >
+                    <p>{{empleo.direccion}}</p>
+                    <p>{{empleo.localidad}}</p>
+                    <p>{{empleo.modalidad}}</p>
+                    <p>Numero de contacto: {{empleo.numero}}</p>
+                        <p style="white-space: pre-wrap;">{{ empleo.descripcion }}</p>
+
+                </div>
             </div>
         </div>
         {% for o in opiniones %}

@@ -18,6 +18,10 @@ class Empleos(models.Model):
     published = models.DateTimeField(default=timezone.now)
     imagen = models.ImageField(null=True,blank=True,upload_to='empleos',default='empleos/empleo_def.png')
     categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
+    localidad = models.CharField(max_length=50, null=False, default='No aclarado')
+    modalidad = models.CharField(max_length=50, null=False, default='No aclarado')
+    direccion = models.CharField(max_length=50, null=False,default='No aclarado')
+    numero = models.CharField(max_length=20, null=False, default='0000000000')
 
     def __str__(self):
         return self.titulo
