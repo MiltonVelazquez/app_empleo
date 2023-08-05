@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}
+<title>Chemp - Modificar Opinion</title>
+{% endblock%}
+{% block navegacion %}
+{% include 'navegacion.html' %}
+{% endblock %}
+{% block contenido %}
+<h3 style="text-align: center; margin:2%; color: #185fbe;">Modificar Opinion</h3>
+<div>
+    <div>
+        <div>
+            <form action="" enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                <div style="text-align: center;">
+                    <textarea name="texto" id="id_texto" cols="90" rows="2"></textarea>
+                </div>
+                <div style="text-align: center; margin:2%;">
+                    <input style="text-align: center;" type="submit" value="Opinar">
+                </div>
+                <!-- Button trigger modal -->
+    </div>
+</div>
+{% endblock %}

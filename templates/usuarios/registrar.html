@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}
+{% if user.is_authenticated %}
+<title>Chemp - Modificar Usuario</title>
+{% else %}
+<title>Chemp - Registarse</title>
+{%endif%}
+{% endblock%}
+{% block navegacion %}
+{% include 'navegacion.html' %}
+{% endblock %}
+{% block contenido %}
+<div class="container">
+    {% if user.is_authenticated %}
+    <h3 style="text-align: center; margin:2%; color: #185fbe;">Modificar Usuario</h3>
+    {% else %}
+    <h3 style="text-align: center; margin:2%; color: #185fbe;">Registrar Usuario</h3>
+    {% endif %}
+    <form enctype="multipart/form-data" action="" method="post">{% csrf_token %} <!-- EL ENCTYPE RECOLECTA LAS FOTOS QUE SE COLOQUEN EN EL FORM--> 
+        {{ form.as_p }}
+        <div class="col-auto">
+            {% if user.is_authenticated %}
+            <button class="btn btn-primary" type="submit">Actualizar</button>
+            {% else %}
+            <button class="btn btn-primary" type="submit">Registrarse</button>
+            {% endif %}
+        </div>
+    </form>
+    
+</div>
+{% endblock %}

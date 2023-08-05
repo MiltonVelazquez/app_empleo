@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block titulo %}
+    {% endblock %}
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body class="body" style="position: relative; padding-bottom: 8em; min-height: 100vh;">
+    <div>
+        {% block navegacion %}
+        {% endblock %}
+    </div>
+    <div>
+        {% block contenido %}
+        {% endblock %}
+    </div>
+    <!-- Footer -->
+
+    <footer style="background-color: #1eb162; position: absolute; bottom: 0; width: 100%; margin-top: 1em;">
+        <div style="text-align: left; float: left;">
+            <h4><a href="{% url 'apps.mensajes:agregar_mensaje' %}">Contacto</a></h4>
+            <h4><a href="{% url 'acercade' %}">Acerca de Nosotros</a></h4>
+        </div>
+        <div style="text-align:right; float:right;">
+            <h5>Sitio web desarrollado <br> por Milton Velazquez</h5>
+        </div>
+        <div style="text-align: center;">
+            <a href="{% url 'inicio' %}">
+                <img src="{% static 'img/logo.png' %}" alt="Logo">
+            </a>
+        </div>
+        <br>
+        <br>
+        <h6 style="text-align: center; margin-top: 2;">© Copyright Informatorio - Comision 4</h6>
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

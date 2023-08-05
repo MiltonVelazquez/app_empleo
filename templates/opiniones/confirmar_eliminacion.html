@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}
+<title>Chemp - Eliminar Comentario</title>
+{% endblock%}
+{% block navegacion %}
+{% include 'navegacion.html' %}
+{% endblock %}
+{% block contenido %}
+<div style="text-align: center; margin: 10%;">
+
+    <h3 style="text-align: center; margin:2%; color: #185fbe;">Eliminar Comentario</h3>
+    <p>¿Esta seguro que desea eliminar este comentario?</p>
+    <form action="" method="post" style="display: inline-block;">
+        {% csrf_token %}
+        <input class="btn btn-outline-secondary" type="submit" value="Eliminar" style="margin: 2px; display: inline-block;">
+    </form>
+    <a class="btn btn-outline-secondary" href="{% url 'apps.empleos:listar_empleos' %}" style="margin: 2px; display: inline-block;">Cancelar</a>
+</div>
+{% endblock %}

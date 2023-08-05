@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}
+<title>Chemp - Agregar Categoria</title>
+{% endblock%}
+{% block navegacion %}
+{% include 'navegacion.html' %}
+{% endblock %}
+{% block contenido %}
+<form action="" method="POST" enctype="multipart/form-data" style="text-align: center; margin-top: 10%; margin-bottom: 3%;">
+    {% csrf_token %}
+    <div>
+        <header>
+            <h3 style="text-align: center; margin:2%; color: #185fbe;">Agregar Categoria</h3>
+            <p>Ingrese el nombre de la categoria y presione Guardar</p>
+        </header>
+        <div>
+            <input type="text" name="nombre" placeholder="Ingrese la categoria">
+            <input type="submit" value="Guardar">
+        </div>
+
+    </div>
+</form>
+<div style="text-align: center;">
+
+    {% if error_msg %}
+    <p>{{ error_msg }}</p>
+    {% endif %}
+</div>
+{% endblock %}

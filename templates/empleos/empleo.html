@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}
+<title>Chemp - {{empleo.titulo}}</title>
+{% endblock%}
+{% block navegacion %}
+{% include 'navegacion.html' %}
+{% endblock %}
+{% block contenido %}
+<h3 style="text-align: center; margin:2%; color: #185fbe;">Detalles de Empleo</h3>
+{% if user.es_colaborador %}
+<div class="dropdown" style="text-align: center; margin: 2%;">
+    <button type="button" class="dropdown-toggle" data-bs-toggle="dropdown">Administrar Empleo</button>
+    <ul class="dropdown-menu">
+        <li><a clas="dropdown-item" href="{% url 'apps.empleos:modificar_empleo' empleo.pk %}">Modificar Empleo</a></li>
+        <li><a clas="dropdown-item" href="{% url 'apps.empleos:eliminar_empleo' empleo.pk %}">Eliminar Empleo</a></li>
+    </ul>
+</div>
+{% endif %}
+<div>
+    <section>
+        <div style="border-bottom: dotted 3px #185fbe ; text-align: center; margin-bottom: 2%;">
+            <div style="text-align: center; display: inline-block;">
+                <img src="{{ empleo.imagen.url }}" alt="" style="padding-bottom: 70px; width: 180px; width: 143.7; display: inline-block; ;">
+                <p>Agregado: {{ empleo.fecha_agregado}} </p>
+            </div>
+            <div style="display: inline-block; text-align:center; margin-top: 40px; margin-left: 20%;">
+                <h2>
+                <strong >
+                    {{ empleo.titulo }}
+                </strong>
+                </h2>
+                <h3>{{ empleo.nombre_empresa }}</h3>
+                <p style="text-align: center;  white-space: pre-wrap; 
+                width: 200px;">{{ empleo.descripcion }}</p>
+            </div>
+        </div>
+        {% for o in opiniones %}
+        {% if user.is_authenticated and user.id == o.usuario.id or user.es_colaborador %}
+        <div class="dropdown" style="text-align: center;" style="margin-top: 2%;">
+            <button type="button" class="dropdown-toggle" data-bs-toggle="dropdown">Administrar Opinion</button>
+            <ul class="dropdown-menu">
+                <li><a clas="dropdown-item" href="{% url 'apps.opiniones:modificar_opinion' o.pk %}">Modificar Opinion</a></li>
+                <li><a clas="dropdown-item" href="{% url 'apps.opiniones:eliminar_opinion' o.pk %}">Eliminar Opinion</a></li>
+            </ul>
+            
+        </div>
+        {% endif %}
+        <div style="text-align: left ; margin-left: 50px;">
+            <div>
+                <div>
+                    <img style="display: inline-block;vertical-align: top;"  src="{{o.usuario.imagen.url}}"  width="40" height="40" alt="">
+                    <div style="display: inline-block; vertical-align: top;">
+                        <div>
+                            <h6 style="margin-left: 2%;">{{o.usuario.username}}</h6>
+                            <p style="margin-left: 5%;">{{o.texto}}</p>
+                        </div>
+                        <small>{{o.fecha}}</small>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        {% endfor %}
+        <div>
+            {% include 'opiniones/agregar_opinion.html' with empleo_id=empleo.id %}
+        </div>
+    </section>
+</div>
+{% endblock %}

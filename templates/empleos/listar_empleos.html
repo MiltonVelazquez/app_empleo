@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}
+<title>Chemp - Empleos</title>
+{% endblock%}
+{% block navegacion %}
+{% include 'navegacion.html' %}
+
+{% endblock %}
+{% block contenido %}
+<h3 style="text-align: center; margin:2%; color: #185fbe;">
+    <strong>Empleos</strong>
+</h3>
+{% if empleos %}
+<section>
+    <form action="{% url 'apps.empleos:listar_empleos' %}" method="get" class="d-flex" role="search">
+        <input type="search" class="form-control me-2" style=" height: 25%; width: 50%; margin-left:25%;"
+            placeholder="Buscar Empleo" name="buscador">
+        <button type="submit" style="height: 25%; margin-top: 3px;">Buscar</button>
+    </form>
+    <div class="dropdown" style="display: inline-block; margin-left: 30%; margin-top: 6px;">
+
+        <ul class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categorias
+            </a>
+            <ul class="dropdown-menu">
+                {% for c in categorias %}
+                <li>
+                    <a class="dropdown-item"
+                        href="{% url 'apps.empleos:listar_por_categoria' c.nombre %}">{{c.nombre}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </ul>
+    </div>
+
+    <form action="{% url 'apps.empleos:ordenar_por' %}" style="display: inline-block; margin-top: 1px;">
+        <div class="dropdown" style="display: inline-block;">
+            <ul class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">Ordernar Por Fecha</a>
+                <ul class="dropdown-menu">
+                    <li><button clas="dropdown-item" href="" name="orden" value="fecha">Ascendente</button></li>
+                    <li><button clas="dropdown-item" href="" name="orden" value="des_fecha">Descendente</button></li>
+                </ul>
+            </ul>
+        </div>
+        <div class="dropdown" style="display: inline-block;">
+            <ul class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">Ordernar Por Titulo</a>
+                    <ul class="dropdown-menu">
+                        <li><button clas="dropdown-item" href="" name="orden" value="titulo">Ascendente</button></li>
+                        <li><button clas="dropdown-item" href="" name="orden" value="des_titulo">Descendente</button></li>
+                    </ul>
+                </ul>
+        </div>
+    </form>
+        <div class="row">
+            {% for e in empleos %}
+        <div class="col-md-4 mb-3">
+            <div class="card" style="text-align: center;">
+                <div class="card-img-top" style="display: block; width: 70%; margin: auto;">
+                    <img src="{{ e.imagen.url }}" class="card-img-top w-50" alt="{{e.titulo}}">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{e.titulo}}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Empresa: {{e.nombre_empresa}}</li>
+                    <li class="list-group-item">Categoria: {{e.categoria}}</li>
+                    <li class="list-group-item">Agregado por: {{e.colaborador}}</li>
+                </ul>
+                       <p style='text-align: center; margin-top: 2%;' class="mbr-timeline-date "><small
+                                class="text-body-secondary">{{e.fecha_agregado}}</small></p>
+                <div class="card-body">
+                    <a href="{% url 'apps.empleos:empleo_detalle' e.id %}" class="btn btn-primary"
+                        style="font-size: small;">Leer
+                        más</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}{% endif %}
+        
+        {% include 'paginador.html' %}
+</section>
+{% endblock %}

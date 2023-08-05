@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}
+<title>Chemp - Eliminar Empleo</title>
+{% endblock%}
+{% block navegacion %}
+{% include 'navegacion.html' %}
+{% endblock %}
+{% block contenido %}
+<div style="text-align: center; margin: 10%;">
+
+    <h3 style="text-align: center; margin:2%; color: #185fbe;">Eliminar Empleo</h3>
+    <p>¿Esta seguro que desea eliminar este empleo?</p>
+    <form action="" method="post" style="display: inline-block;">
+        {% csrf_token %}
+        <input class="btn btn-outline-secondary" type="submit" value="Eliminar">
+    </form>
+    <a class="btn btn-outline-secondary" href="{% url 'apps.empleos:listar_empleos' %}">Cancelar</a>
+</div>
+    {% endblock %}

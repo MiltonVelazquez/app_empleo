@@ -1,0 +1,59 @@
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block titulo %}
+    <title>Chemp - Contactos</title>
+    {% endblock%}
+    {% block navegacion %}
+    {% include 'navegacion.html' %}
+    {% endblock %}
+    {% block contenido %}
+    <h3 style="text-align: center; margin:2%; color: #185fbe;">Contacto</h3>
+    <div>
+        <form action="" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <div style="text-align: center;">
+                <p>Ingrese el asunto del mensaje</p>
+                <textarea name="asunto" id="id_asunto" cols="90" rows="2"></textarea>
+                <p>Ingrese su mensaje</p>
+                <textarea name="texto" id="id_texto" cols="90" rows="2"></textarea>
+                <br>
+                <p style="text-align: center; margin-top: 2%;"><small>*En caso de querer agregar un empleo, proporcione toda la informacion(nombre de la empresa, nombre del empleo,<br> modalidad, descripcion, localidad, una imagen de su empresa y requisitos) y en menos de 24hs sera publicado en el sitio web.</small></p>
+
+                {{form.imagen}}
+                {{form.media}}
+            </div>
+            {% if user.is_authenticated %}
+            <div style="text-align: center; margin-top: 2%;" >
+
+                <input  type="submit" value="Enviar Mensaje">
+            </div>        
+                    {% else %}
+                    <!-- Button trigger modal -->
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Enviar Mensaje
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Error</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Usted tiene que registrarse y/o iniciar sesion para enviar un mensaje.   
+                                </div>
+                                <div class="modal-footer">
+                                    <a class="btn btn-outline-secondary" href="{% url 'apps.usuarios:iniciar_sesion' %}" target="_blank">Iniciar Sesion</a>
+                                    <a class="btn btn-outline-secondary" href="{% url 'apps.usuarios:registrar' %}" target="_blank">Registrarse</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {%endif%}
+        </form>
+    </div>
+    {%endblock%}
